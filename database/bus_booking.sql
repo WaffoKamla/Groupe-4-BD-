@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Sep 09, 2020 at 04:32 AM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.2.33
+-- Hôte : 127.0.0.1
+-- Généré le : mar. 12 nov. 2024 à 05:05
+-- Version du serveur : 10.4.32-MariaDB
+-- Version de PHP : 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `bus_booking`
+-- Base de données : `bus_booking1`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `booked`
+-- Structure de la table `booked`
 --
 
 CREATE TABLE `booked` (
@@ -35,21 +35,21 @@ CREATE TABLE `booked` (
   `qty` int(11) NOT NULL,
   `status` tinyint(1) DEFAULT 0 COMMENT '1=Paid, 0- Unpaid',
   `date_updated` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `booked`
+-- Déchargement des données de la table `booked`
 --
 
 INSERT INTO `booked` (`id`, `schedule_id`, `ref_no`, `name`, `qty`, `status`, `date_updated`) VALUES
-(1, 1, '202009091727', 'John Smith', 1, 1, '2020-09-09 10:29:44'),
+(1, 1, '202009091727', 'kang', 2, 1, '2024-11-12 04:57:45'),
 (2, 1, '202009091626', 'Sample', 2, 0, '2020-09-09 09:34:28'),
 (3, 1, '202009099953', 'asdasd asdasd', 27, 0, '2020-09-09 09:53:09');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bus`
+-- Structure de la table `bus`
 --
 
 CREATE TABLE `bus` (
@@ -58,19 +58,20 @@ CREATE TABLE `bus` (
   `bus_number` varchar(50) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '0 = inactive, 1 = active',
   `date_updated` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `bus`
+-- Déchargement des données de la table `bus`
 --
 
 INSERT INTO `bus` (`id`, `name`, `bus_number`, `status`, `date_updated`) VALUES
-(3, 'Economy', '5001', 1, '2020-09-08 13:54:42');
+(3, 'Economy', '5001', 1, '2020-09-08 13:54:42'),
+(4, 'finex', '00017', 1, '2024-11-12 04:41:19');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `location`
+-- Structure de la table `location`
 --
 
 CREATE TABLE `location` (
@@ -80,10 +81,10 @@ CREATE TABLE `location` (
   `state` varchar(250) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '0= inactive , 1= active',
   `date_updated` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `location`
+-- Déchargement des données de la table `location`
 --
 
 INSERT INTO `location` (`id`, `terminal_name`, `city`, `state`, `status`, `date_updated`) VALUES
@@ -93,7 +94,7 @@ INSERT INTO `location` (`id`, `terminal_name`, `city`, `state`, `status`, `date_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `schedule_list`
+-- Structure de la table `schedule_list`
 --
 
 CREATE TABLE `schedule_list` (
@@ -107,10 +108,10 @@ CREATE TABLE `schedule_list` (
   `availability` int(11) NOT NULL,
   `price` text NOT NULL,
   `date_updated` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `schedule_list`
+-- Déchargement des données de la table `schedule_list`
 --
 
 INSERT INTO `schedule_list` (`id`, `bus_id`, `from_location`, `to_location`, `departure_time`, `eta`, `status`, `availability`, `price`, `date_updated`) VALUES
@@ -120,7 +121,7 @@ INSERT INTO `schedule_list` (`id`, `bus_id`, `from_location`, `to_location`, `de
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Structure de la table `users`
 --
 
 CREATE TABLE `users` (
@@ -131,83 +132,84 @@ CREATE TABLE `users` (
   `password` varchar(25) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT ' 0 = incative , 1 = active',
   `date_updated` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `users`
+-- Déchargement des données de la table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `user_type`, `username`, `password`, `status`, `date_updated`) VALUES
 (1, 'Administrator', 1, 'admin', 'admin123', 1, '2020-09-08 16:42:28'),
-(2, 'John Smith', 1, 'jsmth', 'admin123', 1, '2020-09-08 16:13:53');
+(2, 'kang', 1, 'jsmth', 'kang', 1, '2024-11-12 04:58:13'),
+(3, 'jp', 1, 'jp', 'jp', 1, '2024-11-12 04:41:45');
 
 --
--- Indexes for dumped tables
+-- Index pour les tables déchargées
 --
 
 --
--- Indexes for table `booked`
+-- Index pour la table `booked`
 --
 ALTER TABLE `booked`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `bus`
+-- Index pour la table `bus`
 --
 ALTER TABLE `bus`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `location`
+-- Index pour la table `location`
 --
 ALTER TABLE `location`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `schedule_list`
+-- Index pour la table `schedule_list`
 --
 ALTER TABLE `schedule_list`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Index pour la table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT for table `booked`
+-- AUTO_INCREMENT pour la table `booked`
 --
 ALTER TABLE `booked`
   MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `bus`
+-- AUTO_INCREMENT pour la table `bus`
 --
 ALTER TABLE `bus`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `location`
+-- AUTO_INCREMENT pour la table `location`
 --
 ALTER TABLE `location`
   MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `schedule_list`
+-- AUTO_INCREMENT pour la table `schedule_list`
 --
 ALTER TABLE `schedule_list`
   MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
